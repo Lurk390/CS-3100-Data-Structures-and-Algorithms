@@ -1,0 +1,14 @@
+{
+    "makefile.launchConfigurations": [
+        {
+            "cwd": "c:\\Users\\elbas\\Desktop\\School\\OneDrive - Wright State University\\4 Senior\\2023 Spring\\Data Structures & Algorithms\\Projects\\Project2",
+            "binaryPath": "c:\\Users\\elbas\\Desktop\\School\\OneDrive - Wright State University\\4 Senior\\2023 Spring\\Data Structures & Algorithms\\Projects\\Project2\\project2.exe",
+            "binaryArgs": []
+        }
+    ],
+    "files.associations": {
+        "iosfwd": "cpp",
+        "iostream": "cpp",
+        "ostream": "cpp"
+    }
+}
