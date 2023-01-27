@@ -18,15 +18,17 @@ void checkWinner(Character &char1, Character &char2); // Check who is the winner
 
 int main()
 {
-	Character char1("Ulgar", "Barbarian", 80, 5, 5, 24); // Used to test without inputs
-	char1.print();
-	// Character char1;
-	// initializeCharacter(char1);
+	// Character char1("Ulgar", "Barbarian", 80, 5, 5, 24);
+	// char1.print();
 
-	Character char2("Zimzizz", "Wizard", 40, 5, 15, 18); // Used to test without inputs
-	char2.print();
-	// Character char2;
-	// initializeCharacter(char2);
+	// Character char2("Zimzizz", "Wizard", 40, 5, 15, 18);
+	// char2.print();
+
+	Character char1;
+	initializeCharacter(char1);
+
+	Character char2;
+	initializeCharacter(char2);
 
 	srand(time(nullptr)); // Seed the random number generator
 	fight(char1, char2);
@@ -38,8 +40,7 @@ int main()
 void initializeCharacter(Character &character)
 {
 	string name;
-	cout << endl
-		 << "First character name? ";
+	cout << "Character name? ";
 	cin >> name;
 	character.setName(name);
 
