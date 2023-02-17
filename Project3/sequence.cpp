@@ -13,12 +13,10 @@ Sequence::Sequence(size_type sz) : numElts(0),
 }
 
 // Copy constructor
-Sequence::Sequence(const Sequence &s)
+Sequence::Sequence(const Sequence &s) : numElts(0),
+                                        head(nullptr),
+                                        tail(nullptr)
 {
-    numElts = s.numElts;
-    head = s.head;
-    tail = s.tail;
-
     // traverse the list and copy each node
     SequenceNode *currNode = s.head;
     while (currNode != nullptr)
@@ -31,24 +29,28 @@ Sequence::Sequence(const Sequence &s)
 // Destructor
 Sequence::~Sequence()
 {
-    clear();
+    if (numElts > 0)
+    {
+        clear();
+    }
 }
 
 // Copy constructor
 Sequence &Sequence::operator=(const Sequence &s)
 {
-    clear();
-
-    numElts = s.numElts;
-    head = s.head;
-    tail = s.tail;
-
-    // traverse the list and copy each node
-    SequenceNode *currNode = s.head;
-    while (currNode != nullptr)
+    // check for self assignment
+    if (this != &s)
     {
-        push_back(currNode->elt);
-        currNode = currNode->next;
+        // clear the current list
+        clear();
+
+        // traverse the list and copy each node
+        SequenceNode *currNode = s.head;
+        while (currNode != nullptr)
+        {
+            push_back(currNode->elt);
+            currNode = currNode->next;
+        }
     }
     return *this;
 }
@@ -99,13 +101,20 @@ void Sequence::pop_back()
     // nothing in the list
     if (tail == nullptr && head == nullptr)
     {
-        throw exception();
+        throw std::exception();
+    }
+    else if (numElts == 1)
+    {
+        delete tail;
+        tail = head = nullptr;
+        numElts--;
     }
     else
     {
         SequenceNode *prevNode = tail->prev;
         delete tail;
         tail = prevNode;
+        tail->next = nullptr;
         numElts--;
     }
 }
@@ -192,22 +201,15 @@ Sequence::size_type Sequence::size() const
 // Removes all items from the sequence
 void Sequence::clear()
 {
-    if (numElts > 0)
+    SequenceNode *currNode = head;
+    while (currNode != nullptr)
     {
-        SequenceNode *currNode = head;
-        while (currNode != nullptr)
-        {
-            SequenceNode *nextNode = currNode->next;
-            delete currNode;
-            currNode = nextNode;
-        }
-        numElts = 0;
-        head = tail = nullptr;
+        SequenceNode *nextNode = currNode->next;
+        delete currNode;
+        currNode = nextNode;
     }
-    else
-    {
-        throw exception();
-    }
+    numElts = 0;
+    head = tail = nullptr;
 }
 
 // Removes count number of items starting from position
@@ -242,6 +244,7 @@ void Sequence::erase(size_type position, size_type count)
     // if the position is at the end of the list
     else if (position + count == numElts)
     {
+        SequenceNode *currNode = tail;
         for (int i = 0; i < count; i++)
         {
             SequenceNode *prevNode = currNode->prev;
@@ -251,6 +254,10 @@ void Sequence::erase(size_type position, size_type count)
         }
         tail = currNode;
         tail->next = nullptr;
+    }
+    else if (count == numElts && position == 0)
+    {
+        clear();
     }
     // if the position is in the middle of the list
     else
@@ -263,9 +270,9 @@ void Sequence::erase(size_type position, size_type count)
         SequenceNode *oldNextNode = currNode->next;
         for (int i = 0; i < count; i++)
         {
-            currNode = nextNode;
             nextNode = currNode->next;
             delete currNode;
+            currNode = nextNode;
             numElts--;
         }
         prevNode->next = currNode;
