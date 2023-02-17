@@ -4,7 +4,6 @@
 
 #include <iostream>
 #include <exception>
-#include <string.h>
 
 using namespace std;
 
