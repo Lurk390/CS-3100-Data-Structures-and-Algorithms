@@ -1,12 +1,14 @@
 #include "AVLTree.h"
 #include <iostream>
 #include <string>
+
 using namespace std;
 
 int main()
 {
 	AVLTree tree;
 	cout << tree.insert(50, "Fifty");
+
 	// This should print 0, because it returns false (no duplicates allowed):
 	cout << tree.insert(50, "Another fifty");
 	cout << tree.insert(100, "One hundred");
@@ -59,6 +61,7 @@ int main()
 	}
 	cout << "\n\n"
 		 << endl;
+
 	vec = tree.findRange(30, 100); // left subtree
 	for (vector<string>::iterator it = vec.begin(); it != vec.end(); ++it)
 	{
@@ -66,5 +69,6 @@ int main()
 	}
 	cout << "\n\n"
 		 << endl;
+
 	return 0;
 }
