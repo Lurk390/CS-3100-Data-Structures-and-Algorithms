@@ -1,51 +1,95 @@
 #include "AVLTree.h"
 
-using namespace std;
-
 AVLTree::AVLTree()
 {
-    root = NULL;
+    root = nullptr;
     size = 0;
-    height = 0;
+    height = NULL;
 }
 
 AVLTree::~AVLTree()
 {
-    // TODO
 }
 
 bool AVLTree::insert(int key, string value)
 {
-    // TODO
+    if (root == nullptr)
+    {
+        root = new AVLNode(key, value, nullptr, nullptr, nullptr);
+        size++;
+        height = 0;
+        return true;
+    }
+    else
+    {
+        AVLNode *current = root;
+        while (current != nullptr)
+        {
+            // Check for duplicate key
+            if (key == current->key)
+            {
+                return false;
+            }
+            // If key is less than current node, go left
+            else if (key < current->key)
+            {
+                // If left child is null, insert new node
+                if (current->left == nullptr)
+                {
+                    current->left = new AVLNode(key, value, current, nullptr, nullptr);
+                    size++;
+                    return true;
+                }
+                // Otherwise, go left
+                else
+                {
+                    current = current->left;
+                }
+            }
+            // If key is greater than current node, go right
+            else
+            {
+                // If right child is null, insert new node
+                if (current->right == nullptr)
+                {
+                    current->right = new AVLNode(key, value, current, nullptr, nullptr);
+                    size++;
+                    return true;
+                }
+                // Otherwise, go right
+                else
+                {
+                    current = current->right;
+                }
+            }
+        }
+    }
+
     return false;
 }
 
 bool AVLTree::find(int key, string &value)
 {
-    // TODO
     return false;
 }
 
 int AVLTree::getHeight()
 {
-    // TODO
     return 0;
 }
 
 int AVLTree::getSize()
 {
-    // TODO
     return 0;
 }
 
 vector<string> AVLTree::findRange(int lowkey, int highkey)
 {
-    // TODO
     return vector<string>();
 }
 
 ostream &operator<<(ostream &os, const AVLTree &me)
 {
-    // TODO
+    // Right-child-first inorder traversal
     return os;
 }
