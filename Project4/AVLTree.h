@@ -1,3 +1,12 @@
+/*
+Project #4 - Indexing with AVL Trees
+
+This is the header file for the AVLTree class. It contains the
+declaration of the member functions of the AVLTree class as well as
+the AVLNode class.
+
+Author: Mahmoud Elbasiouny
+*/
 #include <string>
 #include <vector>
 

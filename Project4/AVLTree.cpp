@@ -1,3 +1,11 @@
+/*
+Project #4 - Indexing with AVL Trees
+
+This is the implementation file for the AVLTree class. It contains the
+implementation of the member functions of the AVLTree class.
+
+Author: Mahmoud Elbasiouny
+*/
 #include "AVLTree.h"
 #include <iostream>
 
