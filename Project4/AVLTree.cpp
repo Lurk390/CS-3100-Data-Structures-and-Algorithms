@@ -20,6 +20,12 @@ AVLTree::~AVLTree()
     deleteNodes(root);
 }
 
+AVLTree::AVLTree(const AVLTree &other)
+{
+    root = copyTree(other.root);
+    size = other.size;
+}
+
 bool AVLTree::insert(int key, string value)
 {
     AVLNode *newNode = new AVLNode(key, value, nullptr, nullptr, nullptr, 0);
@@ -357,6 +363,63 @@ int AVLTree::getBalance(AVLNode *node) const
         return getHeight(node->left) - getHeight(node->right);
     }
     return 0;
+}
+
+AVLTree &AVLTree::operator=(const AVLTree &tree)
+{
+    // Check for self-assignment
+    if (this == &tree)
+    {
+        return *this;
+    }
+
+    // Delete the current tree
+    deleteNodes(root);
+
+    // Create a copy of the new tree
+    if (tree.root != nullptr)
+    {
+        // Copy the root of the source tree to the root of the new tree
+        root = copyTree(tree.root);
+        size = tree.size;
+    }
+
+    // Return a reference to the new tree
+    return *this;
+}
+
+AVLTree::AVLNode *AVLTree::copyTree(AVLNode *root)
+{
+    if (root == nullptr)
+    {
+        // If the source node is null, return null
+        return nullptr;
+    }
+    else
+    {
+        // Create a new node with the same key and value as the source node
+        AVLNode *newNode = new AVLNode(root->key, root->value, nullptr, nullptr, nullptr, 0);
+
+        // Recursively copy the left subtree of the source node to the left subtree of the new node
+        newNode->left = copyTree(root->left);
+        if (newNode->left != nullptr)
+        {
+            newNode->left->parent = newNode;
+        }
+
+        // Recursively copy the right subtree of the source node to the right subtree of the new node
+        newNode->right = copyTree(root->right);
+        if (newNode->right != nullptr)
+        {
+            newNode->right->parent = newNode;
+        }
+
+        // Copy the balance factor of the source node to the new node
+        newNode->balance = root->balance;
+
+        // Return the ro
+        return newNode;
+    }
 }
 
 ostream &operator<<(ostream &os, const AVLTree &me)

@@ -47,6 +47,9 @@ public:
     // Destructor. Frees all memory allocated to the AVL tree.
     ~AVLTree();
 
+    // Copy constructor. Creates a new AVL tree that is a deep copy of the given tree.
+    AVLTree(const AVLTree &tree);
+
     // Inserts a new key/value pair into the tree. Duplicate keys are not allowed.
     // Returns true if the key/value pair is successfully inserted into the map,
     // and false if the pair could not be inserted.
@@ -91,6 +94,12 @@ public:
 
     // Returns the balance of a given node.
     int getBalance(AVLNode *node) const;
+
+    // Creates an independent copy of the tree
+    AVLTree &operator=(const AVLTree &tree);
+
+    // Helper function for operator=
+    AVLNode *copyTree(AVLNode *root);
 
     // Prints the tree using the << operator. Overloads the << operator to print the
     // AVL tree “sideways” using indentation to show the structure of the tree.
