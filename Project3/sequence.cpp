@@ -1,3 +1,16 @@
+/*
+Project #3 – Linked Sequence Data Structure
+
+This file contains the implementation of the Sequence class. The Sequence class
+is a doubly linked list that stores integers. The class has a constructor, copy
+constructor, destructor, and overloaded assignment operator. The class also
+overloads the [] operator to allow for bracket notation. The class also has
+methods to push and pop items to the front and back of the list, and to insert
+items at a specific position in the list.
+
+Author: Mahmoud Elbasiouny
+*/
+
 #include "sequence.h"
 
 // Constructor
