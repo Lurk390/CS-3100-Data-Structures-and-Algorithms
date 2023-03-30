@@ -1,3 +1,13 @@
+/*
+Project #5 - Alphabet Trie Autocomplete
+
+This is the main file for the Trie class. It contains the main function
+that will be used to test the Trie class and its member functions.
+
+Author: Mahmoud Elbasiouny
+*/
+#include "Trie.h"
+
 #include <iostream>
 #include <fstream>
 #include <vector>
