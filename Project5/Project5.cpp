@@ -17,9 +17,11 @@ using namespace std;
 
 int main()
 {
+    // Open the wordlist file
     ifstream fileIn("wordlist.txt");
     vector<string> wordlist;
 
+    // Load each word into a vector
     if (fileIn.good())
     {
         string word;
@@ -36,11 +38,40 @@ int main()
         cerr << "File not found" << endl;
     }
 
-    for (auto word : wordlist)
+    // Create a trie and insert each word into the trie
+    Trie trie;
+    for (string word : wordlist)
     {
-        cout << word << " ";
+        trie.insert(word);
     }
-    cout << endl;
 
-    return 0;
+    // Prompt user for input
+    cout << "Please enter a word prefix: ";
+    string prefix_input;
+    cin >> prefix_input;
+
+    // Get the list of words that start with the given prefix
+    vector results = trie.complete(prefix_input);
+
+    cout << "There are " << results.size() << " words for the prefix '" << prefix_input << "'. "
+         << "Show Completions? (y/n): ";
+    string choice;
+    cin >> choice;
+
+    // Display the results
+    if (choice == "y")
+    {
+        cout << endl
+             << "Completions" << endl
+             << "-----------" << endl;
+        for (string word : results)
+        {
+            cout << word << endl;
+        }
+    }
+    else
+    {
+        cout << "Goodbye!" << endl;
+        return 0;
+    }
 }
