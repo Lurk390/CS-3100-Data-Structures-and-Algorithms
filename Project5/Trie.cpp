@@ -10,10 +10,13 @@ Author: Mahmoud Elbasiouny
 
 Trie::Trie()
 {
+    size = 0;
+    root = createNode(root);
 }
 
 Trie::~Trie()
 {
+    deleteAll();
 }
 
 Trie::Trie(const Trie &)
@@ -49,4 +52,20 @@ vector<string> Trie::complete(string prefix)
 Trie &Trie::operator=(const Trie &trie)
 {
     return *this;
+}
+
+Trie::Node *Trie::createNode(Node *node)
+{
+    node = new Node;
+
+    // Initialize all children to nullptr
+    for (int i = 0; i < 26; i++)
+    {
+        node->children[i] = nullptr;
+    }
+    return node;
+}
+
+void Trie::deleteAll()
+{
 }

@@ -14,6 +14,22 @@ using namespace std;
 class Trie
 {
 private:
+    struct Node
+    {
+        bool isWord = false;
+        Node *children[26];
+    };
+
+    Node *root;
+    int size;
+
+    // Creates a new node and initializes all children to nullptr. Returns a pointer
+    // to the new node.
+    Node *createNode(Node *);
+
+    // Deletes all nodes in the trie.
+    void deleteAll();
+
 public:
     // Default constructor. Creates an empty Trie.
     Trie();
