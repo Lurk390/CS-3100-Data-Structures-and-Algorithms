@@ -25,7 +25,34 @@ Trie::Trie(const Trie &)
 
 bool Trie::insert(string word)
 {
-    return false;
+    // Start at the root
+    Node *node = root;
+
+    // Iterate through each character in the word
+    for (char ch : word)
+    {
+        // Convert the character to an index
+        int index = ch - 'a';
+
+        // If child doesn't exist, create a new node
+        if (node->children[index] == nullptr)
+        {
+            node->children[index] = createNode(node->children[index]);
+        }
+
+        // Move to the next node
+        node = node->children[index];
+    }
+
+    // Check if word is already in the trie
+    if (node->isWord)
+    {
+        return false;
+    }
+
+    node->isWord = true;
+    size++;
+    return true;
 }
 
 int Trie::count()
