@@ -62,7 +62,7 @@ int Trie::count()
 
 int Trie::getSize()
 {
-    return -1;
+    return size;
 }
 
 int Trie::completeCount(string prefix)
