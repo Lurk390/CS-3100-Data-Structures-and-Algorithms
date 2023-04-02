@@ -17,7 +17,7 @@ Trie::Trie()
 
 Trie::~Trie()
 {
-    deleteAll();
+    deleteAll(root);
 }
 
 Trie::Trie(const Trie &)
@@ -136,6 +136,26 @@ Trie::Node *Trie::createNode(Node *node)
     return node;
 }
 
-void Trie::deleteAll()
+void Trie::deleteAll(Node *node)
 {
+    // Check if node exists
+    if (node == nullptr)
+    {
+        return;
+    }
+
+    // Iterate through all children of the node
+    for (int i = 0; i < 26; i++)
+    {
+        deleteAll(node->children[i]);
+    }
+
+    // If the node is a word, decrement the word count
+    if (node->isWord)
+    {
+        words--;
+    }
+    // Decrement the node count
+    nodes--;
+    delete node;
 }

@@ -29,7 +29,7 @@ private:
     Node *createNode(Node *);
 
     // Deletes all nodes in the trie.
-    void deleteAll();
+    void deleteAll(Node *);
 
 public:
     // Default constructor. Creates an empty Trie.
