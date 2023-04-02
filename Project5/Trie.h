@@ -28,6 +28,10 @@ private:
     // to the new node.
     Node *createNode(Node *);
 
+    // Creates a deep copy of the given trie and returns a pointer to the root of the
+    // new trie.
+    Node *copyTrie(Node *);
+
     // Deletes all nodes in the trie.
     void deleteAll(Node *);
 

@@ -20,8 +20,11 @@ Trie::~Trie()
     deleteAll(root);
 }
 
-Trie::Trie(const Trie &)
+Trie::Trie(const Trie &other)
 {
+    root = copyTrie(other.root);
+    nodes = other.nodes;
+    words = other.words;
 }
 
 bool Trie::insert(string word)
@@ -120,6 +123,17 @@ vector<string> Trie::complete(string prefix)
 
 Trie &Trie::operator=(const Trie &trie)
 {
+    // Check for self-assignment
+    if (this != &trie)
+    {
+        // Delete the current trie
+        deleteAll(root);
+
+        // Copy the other trie
+        root = copyTrie(trie.root);
+        nodes = trie.nodes;
+        words = trie.words;
+    }
     return *this;
 }
 
@@ -134,6 +148,29 @@ Trie::Node *Trie::createNode(Node *node)
     }
     nodes++;
     return node;
+}
+
+Trie::Node *Trie::copyTrie(Node *node)
+{
+    // Check if node exists
+    if (node == nullptr)
+    {
+        return nullptr;
+    }
+
+    // Create a new node
+    Node *newNode = createNode(newNode);
+
+    // Copy the isWord value
+    newNode->isWord = node->isWord;
+
+    // Iterate through all children of the node
+    for (int i = 0; i < 26; i++)
+    {
+        // Copy the children
+        newNode->children[i] = copyTrie(node->children[i]);
+    }
+    return newNode;
 }
 
 void Trie::deleteAll(Node *node)
