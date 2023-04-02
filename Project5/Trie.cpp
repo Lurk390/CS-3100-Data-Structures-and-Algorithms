@@ -10,7 +10,8 @@ Author: Mahmoud Elbasiouny
 
 Trie::Trie()
 {
-    size = 0;
+    nodes = 0;
+    words = 0;
     root = createNode(root);
 }
 
@@ -51,18 +52,18 @@ bool Trie::insert(string word)
     }
 
     node->isWord = true;
-    size++;
+    words++;
     return true;
 }
 
 int Trie::count()
 {
-    return 0;
+    return words;
 }
 
 int Trie::getSize()
 {
-    return size;
+    return nodes;
 }
 
 int Trie::completeCount(string prefix)
@@ -90,6 +91,7 @@ Trie::Node *Trie::createNode(Node *node)
     {
         node->children[i] = nullptr;
     }
+    nodes++;
     return node;
 }
 

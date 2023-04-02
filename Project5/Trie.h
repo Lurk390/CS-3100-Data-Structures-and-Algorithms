@@ -21,7 +21,8 @@ private:
     };
 
     Node *root;
-    int size;
+    int nodes; // Number of nodes in the trie
+    int words; // Number of words in the trie
 
     // Creates a new node and initializes all children to nullptr. Returns a pointer
     // to the new node.
